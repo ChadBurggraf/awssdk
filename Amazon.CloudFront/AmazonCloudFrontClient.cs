@@ -1523,22 +1523,17 @@ namespace Amazon.CloudFront
         private static string Transform(string responseBody, string actionName, Type t)
         {
             XslCompiledTransform transformer = new XslCompiledTransform();
-            char[] seps = { ',' };
             Assembly assembly = Assembly.GetAssembly(t);
-
-            string assemblyName = assembly.FullName;
-            assemblyName = assemblyName.Split(seps)[0];
 
             // Build the name of the xslt Transform to apply to the response
             string ns = t.Namespace;
             string resourceName = String.Concat(
-                assemblyName,
+                AWSClientFactory.AssemblyName,
                 ".",
                 ns,
                 ".Model.",
                 actionName,
-                "Response.xslt"
-                );
+                "Response.xslt");
 
             using (XmlTextReader xmlReader = new XmlTextReader(assembly.GetManifestResourceStream(resourceName)))
             {

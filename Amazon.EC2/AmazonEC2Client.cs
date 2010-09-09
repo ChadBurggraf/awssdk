@@ -4301,23 +4301,16 @@ namespace Amazon.EC2
         private static string Transform(string responseBody, string action, Type t)
         {
             XslCompiledTransform transformer = new XslCompiledTransform();
-
-            // Build the name of the xslt transform to apply to the response
-            char[] seps = { ',' };
-
             Assembly assembly = Assembly.GetAssembly(t);
-            string assemblyName = assembly.FullName;
-            assemblyName = assemblyName.Split(seps)[0];
 
             string ns = t.Namespace;
             string resourceName = String.Concat(
-                assemblyName,
+                AWSClientFactory.AssemblyName,
                 ".",
                 ns,
                 ".Model.",
                 action,
-                "Response.xslt"
-                );
+                "Response.xslt");
 
             using (XmlTextReader xmlReader = new XmlTextReader(assembly.GetManifestResourceStream(resourceName)))
             {

@@ -47,6 +47,12 @@ namespace Amazon
     public static class AWSClientFactory
     {
         /// <summary>
+        /// Gets the name of the AWSSDK assembly without reflection, to support
+        /// merging with ILMerge.
+        /// </summary>
+        public const string AssemblyName = "AWSSDK";
+
+        /// <summary>
         /// Create a client for the Amazon EC2 Service with the default configuration
         /// </summary>
         /// <param name="awsAccessKey">The AWS Access Key associated with the account</param>

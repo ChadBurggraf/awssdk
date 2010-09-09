@@ -1,4 +1,6 @@
 bin/
 obj/
+*.sln
 *.csproj.user
 *.suo
+Newtonsoft.Json.Net20.dll
